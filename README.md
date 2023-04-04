@@ -25,7 +25,7 @@ HyperComponent provides four mechanisms for communicating between the host and t
 &nbsp;   
 ### State change notification
 
-Here the component notifies the host whenever it's state changes. If `externalState` is provided, the component will invoke it the state before attaching to the event `detail` property:
+Here the component notifies the host whenever it's state changes. If `externalState` is provided, the component will invoke it on state before attaching to the event `detail` property:
 
 ```
 componentApp('counter-', elem => {
