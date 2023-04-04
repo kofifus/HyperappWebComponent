@@ -3,27 +3,22 @@ Hyperapp support for Web Components
 &nbsp;   
 ## Syntax:
 ```
-componentApp(componentName, elem => { init?, view, subscriptions?, dispatch?, externalState?, methods?, properties?, cloneCSS?)
+componentApp(
+  componentName,     // component name 
+  elem => { 
+    init?,           // passed to hyperApp 
+    view,            // passed to hyperApp
+    subscriptions?,  // passed to hyperApp 
+    dispatch?,       // passed to hyperApp 
+    externalState?,  // state transform for the `onStateChange` event 
+    methods?,        // element methods 
+    properties?,     // element properties 
+    cloneCSS?        // boolean for cloning host CSS
+  }
+)
 ```
 &nbsp;   
-`componentName` - component name
 
-`init` - passed to hyperApp
-
-`view` - passed to hyperApp
-
-`subscriptions` - passed to hyperApp
-
-`dispatch` - passed to hyperApp
-
-`externalState` - state transform for the `onStateChange` event
-
-`methods` - element methods
-
-`properties` - element properties
-
-`cloneCSS` - boolean for cloning host CSS  
-&nbsp;   
 ## Usage:
 
 HyperComponent provides four mechanisms for communicating between the host and the component:  
