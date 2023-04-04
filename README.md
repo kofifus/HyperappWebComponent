@@ -114,8 +114,8 @@ componentApp('flow-', elem => {
 })
 ```
 
-`getSubComponent` is a helper shortcut for `elem.shadowRoot.querySelector('score-')`
-`Action` invokes score's method `addPoint` dispatching the attached action.
+`getSubComponent` is a helper shortcut for `elem.shadowRoot.querySelector('score-')`  
+`Action` invokes score's method `addPoint` dispatching the attached action.  
 Note the check for `score` is not necessary here, but in actions triggered from `init` the element does not exist yet.  
 &nbsp;   
 ### Change a component's property
