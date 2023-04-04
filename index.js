@@ -51,7 +51,7 @@ export const componentApp = (name, fn) => {
       }
       
       // clone CSS
-      if (opts.cloneCSS) {
+      if (!!opts.cloneCSS) {
         const allCSS = element => {
           const styleSheets = [...(element.styleSheets || [])].map((styleSheet) => {
             try { return [...styleSheet.cssRules].map((rule) => rule.cssText).join(""); } catch (e) {}
@@ -79,7 +79,7 @@ export const componentApp = (name, fn) => {
       
       // map any entry in props to a property where set dispatches an action 
       const props = {}
-      Object.entries(opts.props || {}).forEach(([name, action]) => {
+      Object.entries(opts.properties || {}).forEach(([name, action]) => {
         Object.defineProperty(elem, name, {
           get: () => { return props[name] },
           set: (x) => {
