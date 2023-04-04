@@ -57,8 +57,8 @@ export const componentApp = (name, fn) => {
             try { return [...styleSheet.cssRules].map((rule) => rule.cssText).join(""); } catch (e) {}
           }).filter(Boolean)
           if (element===document) return styleSheets;
-          if (!element.parentElement) return styleSheets.concat(allCSS(document));
-         return styleSheets.concat(allCSS(element.parentElement));
+          if (!element.parentElement) return allCSS(document).concat(styleSheets);
+         return allCSS(element.parentElement).concat(styleSheets);
        }
        
        elem.shadowRoot.adoptedStyleSheets = allCSS(this).map(rulesText => { let res = new CSSStyleSheet(); res.replaceSync(rulesText); return res; })
