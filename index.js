@@ -52,16 +52,23 @@ export const componentApp = (name, fn) => {
       
       // clone CSS
       if (!!opts.cloneCSS) {
-        const allCSS = element => {
-          const styleSheets = [...(element.styleSheets || [])].map((styleSheet) => {
-            try { return [...styleSheet.cssRules].map((rule) => rule.cssText).join(""); } catch (e) {}
+        const cloneStyleSheets = element => {
+          const sheets = [...(element.styleSheets || [])]
+          const styleSheets = sheets.map(styleSheet => {
+            try { 
+              const rulesText = [...styleSheet.cssRules].map(rule => rule.cssText).join("")
+              let res = new CSSStyleSheet()
+              res.replaceSync(rulesText)
+              return res
+            } catch (e) {
+            }
           }).filter(Boolean)
-          if (element===document) return styleSheets;
-          if (!element.parentElement) return allCSS(document).concat(styleSheets);
-         return allCSS(element.parentElement).concat(styleSheets);
+          if (element===document) return styleSheets
+          if (!element.parentElement) return cloneStyleSheets(document).concat(styleSheets)
+         return cloneStyleSheets(element.parentElement).concat(styleSheets)
        }
        
-       elem.shadowRoot.adoptedStyleSheets = allCSS(this).map(rulesText => { let res = new CSSStyleSheet(); res.replaceSync(rulesText); return res; })
+       elem.shadowRoot.adoptedStyleSheets = cloneStyleSheets(this)
       }
       
       // start app and save disaptch fn
