@@ -1,5 +1,5 @@
 {
-  "name": "hyperComponent",
+  "name": "hypercomponent",
   "description": "Hyperapp support for Web Components",
   "version": "0.1.0",
   "dependencies": {},
