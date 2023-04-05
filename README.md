@@ -101,8 +101,10 @@ componentApp('score-', elem => {
 })
 
 componentApp('flow-', elem => {
+  const getSubComponent = name => elem.shadowRoot.querySelector(name);
+  
   const Action = s => {
-    const score = getSubComponent(elem, 'score-');
+    const score = getSubComponent('score-');
     return [ s, score && (dispatch => score.addPoint()) ];    
   }
   
@@ -114,7 +116,6 @@ componentApp('flow-', elem => {
 })
 ```
 
-`getSubComponent` is a helper shortcut for `elem.shadowRoot.querySelector('score-')`  
 `Action` invokes score's method `addPoint` dispatching the attached action.  
 Note the check for `score` is not necessary here, but in actions triggered from `init` the element does not exist yet.  
 &nbsp;   
