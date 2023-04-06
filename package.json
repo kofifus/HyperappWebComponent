@@ -3,6 +3,6 @@
   "description": "Hyperapp support for Web Components",
   "version": "0.1.0",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {},
   "repository": "https://github.com/kofifus/hyperComponent.git"
 }
