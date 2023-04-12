@@ -1,4 +1,4 @@
-# HyperComponent
+# HyperappComponent
 Hyperapp support for Web Components  
 &nbsp;   
 ## Syntax:
