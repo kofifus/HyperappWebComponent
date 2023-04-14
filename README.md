@@ -20,8 +20,10 @@ componentApp(
 &nbsp;   
 
 ## Usage:
-
-HyperComponent provides four mechanisms for communicating between the host and the component:  
+```
+import componentApp from "https://cdn.skypack.dev/hyperappwebcomponent"
+```
+HyperappWebComponent provides four mechanisms for communicating between the host and the component:  
 &nbsp;   
 ### State change notification
 
