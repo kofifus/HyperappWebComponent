@@ -31,8 +31,6 @@ Here the component notifies the host whenever it's state changes. If `externalSt
 
 ```
 componentApp('counter-', elem => {
-  const Change = delta => s => ({ ...s, counter: s.counter + delta });
-  
   return {
     init: { counter: 0},
     view: s => html`
