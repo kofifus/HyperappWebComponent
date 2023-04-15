@@ -64,14 +64,14 @@ Here the component triggers a host event using an Effect:
 
 ```
 componentApp('game-', elem => {
-  const StateChange = (s, ev) => [ 
+  const CounterStateChange = (s, ev) => [ 
     { ...s, counterValue: ev.detail.counterValue },
     ev.detail.counterValue==10 && elem.events.finish.effect
   ]
   
   return {
     init: { counterValue: 0 },
-    view: s => html`<counter- onstateChange=${StateChange} />`, 
+    view: s => html`<counter- onstateChange=${CounterStateChange} />`, 
   }
 })
 
