@@ -141,7 +141,7 @@ componentApp('flow-', elem => {
 Every time the button is clicked, score's property `counter` changes trigerring the attached action in score.  
 &nbsp;   
 ### Full example
-[flems](https://tinyurl.com/yp7kvmxf)
+[flems](https://tinyurl.com/4m4xv5v8)
 
 
 
