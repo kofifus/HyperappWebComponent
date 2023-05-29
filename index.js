@@ -36,9 +36,10 @@ export default (name, fn) => {
           if (opts.externalState) {
             const newExternalState = opts.externalState(state)
             const newExternalStateJson = JSON.stringify(newExternalState)
-            if (newExternalStateJson === this.#prevExternalStateJson) return;
-            this.#prevExternalStateJson = newExternalStateJson;
-            elem.dispatchEvent(new CustomEvent(`stateChange`, { detail: newExternalState }))
+            if (newExternalStateJson !== this.#prevExternalStateJson) {
+              this.#prevExternalStateJson = newExternalStateJson;
+              elem.dispatchEvent(new CustomEvent(`stateChange`, { detail: newExternalState }))
+            }
           } else {
             elem.dispatchEvent(new CustomEvent(`stateChange`, { detail: state }))
           }
