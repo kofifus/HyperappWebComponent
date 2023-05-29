@@ -4,6 +4,7 @@ export default (name, fn) => {
   
   customElements.define(name, class extends HTMLElement {
     #dispatch
+    #prevExternalStateJson
     
     constructor () {
       super() 
@@ -32,8 +33,15 @@ export default (name, fn) => {
         
         const stateChangeMw  = stateMiddleware(state => {
           if (state===undefined) return
-          const options = { detail: state===undefined ? undefined : (opts.externalState ? opts.externalState(state) : state) }
-          elem.dispatchEvent(new CustomEvent(`stateChange`, options))
+          if (opts.externalState) {
+            const newExternalState = opts.externalState(state)
+            const newExternalStateJson = JSON.stringify(newExternalState)
+            if (newExternalStateJson === this.#prevExternalStateJson) return;
+            this.#prevExternalStateJson = newExternalStateJson;
+            elem.dispatchEvent(new CustomEvent(`stateChange`, { detail: newExternalState }))
+          } else {
+            elem.dispatchEvent(new CustomEvent(`stateChange`, { detail: state }))
+          }
           return state
         })
         
