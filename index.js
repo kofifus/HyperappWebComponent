@@ -56,12 +56,19 @@ export default (name, fn) => {
         opts.view = s => s===undefined ? '' : viewFn(s)
       }
       
-      // clone CSS
+      let styleSheets = []
+
+      if (opts.style) {
+        let ss = new CSSStyleSheet()
+        ss.replaceSync(opts.style)
+        styleSheets = styleSheets.concat(ss)
+      }
+
       if (!!opts.cloneCSS) {
         const cloneStyleSheets = element => {
           const sheets = [...(element.styleSheets || [])]
           const styleSheets = sheets.map(styleSheet => {
-            try { 
+            try {
               const rulesText = [...styleSheet.cssRules].map(rule => rule.cssText).join("")
               let res = new CSSStyleSheet()
               res.replaceSync(rulesText)
@@ -69,13 +76,15 @@ export default (name, fn) => {
             } catch (e) {
             }
           }).filter(Boolean)
-          if (element===document) return styleSheets
+          if (element === document) return styleSheets
           if (!element.parentElement) return cloneStyleSheets(document).concat(styleSheets)
-         return cloneStyleSheets(element.parentElement).concat(styleSheets)
-       }
-       
-       elem.shadowRoot.adoptedStyleSheets = cloneStyleSheets(this)
+          return cloneStyleSheets(element.parentElement).concat(styleSheets)
+        }
+
+        styleSheets = styleSheets.concat(cloneStyleSheets(this))
       }
+
+      if (styleSheets.length > 0) elem.shadowRoot.adoptedStyleSheets = styleSheets
       
       // start app and save disaptch fn
       this.#dispatch = app({ init: opts.init, view: opts.view, subscriptions: opts.subscriptions, node: elem.shadowRoot.firstChild , dispatch: opts.dispatch }) 
@@ -84,7 +93,7 @@ export default (name, fn) => {
       if (opts.methods) { 
         const methodsProps = Object.fromEntries(
           Object.entries(opts.methods).map(
-            ([name, action]) => [name, () => this.#dispatch(action)]
+            ([name, action]) => [name, (...args) => this.#dispatch(action, args.length>1 ? args : args[0]) ]
           )
         )
         Object.assign(elem, methodsProps)
@@ -108,4 +117,5 @@ export default (name, fn) => {
     }
     
   })
+
 }
