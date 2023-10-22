@@ -6,7 +6,8 @@ Hyperapp support for Web Components
 componentApp(
   componentName,     // component name 
   elem => { 
-    init?,           // passed to hyperApp 
+    init?,           // passed to hyperApp
+    style?,          // component stylesheet 
     view,            // passed to hyperApp
     subscriptions?,  // passed to hyperApp 
     dispatch?,       // passed to hyperApp 
@@ -33,6 +34,7 @@ Here the component notifies the host whenever it's state changes. If `externalSt
 componentApp('counter-', elem => {
   return {
     init: { counter: 0},
+    style: `button { color: red !important; }`,
     view: s => html`
       <div class="counter">
         <h1>${s.counter}</h1>
@@ -141,7 +143,7 @@ componentApp('flow-', elem => {
 Every time the button is clicked, score's property `counter` changes trigerring the attached action in score.  
 &nbsp;   
 ### Full example
-[flems](https://tinyurl.com/4j256ymb)
+[flems](https://tinyurl.com/ycxaesmm)
 
 
 
