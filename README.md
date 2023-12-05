@@ -125,15 +125,15 @@ Note the check for `score` is not necessary here, but in actions triggered from 
 
 ```
 componentApp('score-', elem => {
-    init: { scoreCount: 0 },
-    view: s => html`${s.scoreCount}`, 
-    properties: {
-      counter: (s, v) => ({...s, scoreCount: Number(v) })
-    }
+  init: { scoreCount: 0 },
+  view: s => html`${s.scoreCount}`, 
+  properties: {
+    counter: (s, v) => ({...s, scoreCount: Number(v) })
+  }
 })
 
 componentApp('flow-', elem => { 
- init: { flowCount: 0 },
+  init: { flowCount: 0 },
   view: s => html`
     <score- counter=${s.flowCount}/>
     <button onclick=${s => ({...s, flowCount: flowCount+1 })}></button>`     
